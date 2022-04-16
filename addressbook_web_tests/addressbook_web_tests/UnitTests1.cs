@@ -40,7 +40,7 @@ namespace AddressBook_Web_Tests
         }
 
         [Test]
-        public void TheUntitledTestCaseTest()
+        public void addNewGroupTests()
         {
             driver.Navigate().GoToUrl(baseURL);
             driver.FindElement(By.Name("user")).Click();

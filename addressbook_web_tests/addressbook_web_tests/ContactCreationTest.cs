@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -8,10 +8,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
-namespace AddressBook_Web_Tests
+namespace addressBook_Web_Tests
 {
     [TestFixture]
-    public class CreateTests
+    public class CreateContactTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -41,24 +41,6 @@ namespace AddressBook_Web_Tests
         }
 
         [Test]
-        // test create group
-        public void addNewGroupTests()
-        {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            InitGroupCreation();
-            GroupData group = new GroupData("aaa");
-            group.Header = "sss";
-            group.Footer = "ddd";
-            FillGroupForm(group);
-            SubmitGroupCreation();
-            OpenHomePage();
-            LogOut();
-        }
-
-        [Test]
-        // test create contract
         public void addNewContractTests()
         {
             OpenHomePage();
@@ -83,27 +65,9 @@ namespace AddressBook_Web_Tests
             driver.FindElement(By.LinkText("Logout")).Click();
         }
 
-        private void SubmitGroupCreation()
-        {
-            driver.FindElement(By.Name("submit")).Click();
-        }
-
         private void SubmitContractCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
-        }
-
-        private void FillGroupForm(GroupData group)
-        {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
         }
 
         private void FillContractForm(ContractData contract)
@@ -181,19 +145,6 @@ namespace AddressBook_Web_Tests
             driver.FindElement(By.Name("notes")).SendKeys("123");
         }
 
-        private void InitGroupCreation()
-        {
-            driver.FindElement(By.Name("new")).Click();
-        }
-        private void InitContactCreation()
-        {
-            driver.FindElement(By.Name("new")).Click();
-        }
-
-        private void GoToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-        }
         private void GoToContractPage()
         {
             driver.FindElement(By.LinkText("add new")).Click();

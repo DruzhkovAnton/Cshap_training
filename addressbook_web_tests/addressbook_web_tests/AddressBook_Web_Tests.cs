@@ -11,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace AddressBook_Web_Tests
 {
     [TestFixture]
-    public class CreateNewGroupTests
+    public class CreateTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -41,6 +41,7 @@ namespace AddressBook_Web_Tests
         }
 
         [Test]
+        // test create group
         public void addNewGroupTests()
         {
             OpenHomePage();
@@ -52,10 +53,32 @@ namespace AddressBook_Web_Tests
             group.Footer = "ddd";
             FillGroupForm(group);
             SubmitGroupCreation();
-            ReturnToGroupsPage();
+            OpenHomePage();
+            LogOut();
         }
 
-        private void ReturnToGroupsPage()
+        [Test]
+        // test create contract
+        public void addNewContractTests()
+        {
+            OpenHomePage();
+            Login(new AccountData("admin", "secret"));
+            GoToContractPage();
+            ContractData contract = new ContractData("aaa", "bbbb");
+            contract.Lastname = "sss";
+            contract.Nickname = "aaaa";
+            contract.Title = "qqqq";
+            contract.Company = "wwww";
+            contract.Address = "dddd";
+            contract.PhoneHome = "1112222";
+            contract.Email = "qqqqq";
+            contract.Homepage = "www.aaaa.ru";
+            FillContractForm(contract);
+            SubmitContractCreation();
+            OpenHomePage();
+            LogOut();
+        }
+        private void LogOut()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
         }
@@ -63,6 +86,11 @@ namespace AddressBook_Web_Tests
         private void SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+        }
+
+        private void SubmitContractCreation()
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
         }
 
         private void FillGroupForm(GroupData group)
@@ -78,7 +106,86 @@ namespace AddressBook_Web_Tests
             driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
         }
 
+        private void FillContractForm(ContractData contract)
+        {
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(contract.FirstName);
+            driver.FindElement(By.Name("middlename")).Click();
+            driver.FindElement(By.Name("middlename")).Clear();
+            driver.FindElement(By.Name("middlename")).SendKeys(contract.MiddleName);
+            driver.FindElement(By.Name("lastname")).Click();
+            driver.FindElement(By.Name("lastname")).Clear();
+            driver.FindElement(By.Name("lastname")).SendKeys(contract.Lastname);
+            driver.FindElement(By.Name("nickname")).Click();
+            driver.FindElement(By.Name("nickname")).Clear();
+            driver.FindElement(By.Name("nickname")).SendKeys(contract.Nickname);
+            driver.FindElement(By.Name("title")).Click();
+            driver.FindElement(By.Name("title")).Clear();
+            driver.FindElement(By.Name("title")).SendKeys(contract.Title);
+            driver.FindElement(By.Name("company")).Click();
+            driver.FindElement(By.Name("company")).Clear();
+            driver.FindElement(By.Name("company")).SendKeys(contract.Company);
+            driver.FindElement(By.Name("address")).Click();
+            driver.FindElement(By.Name("address")).Clear();
+            driver.FindElement(By.Name("address")).SendKeys(contract.Address);
+            driver.FindElement(By.Name("home")).Click();
+            driver.FindElement(By.Name("home")).Clear();
+            driver.FindElement(By.Name("home")).SendKeys(contract.PhoneHome);
+            driver.FindElement(By.Name("mobile")).Click();
+            driver.FindElement(By.Name("mobile")).Clear();
+            driver.FindElement(By.Name("mobile")).SendKeys(contract.PhoneMobile);
+            driver.FindElement(By.Name("work")).Click();
+            driver.FindElement(By.Name("work")).Clear();
+            driver.FindElement(By.Name("work")).SendKeys(contract.PhoneWork);
+            driver.FindElement(By.Name("fax")).Click();
+            driver.FindElement(By.Name("fax")).Clear();
+            driver.FindElement(By.Name("fax")).SendKeys(contract.PhoneFax);
+            driver.FindElement(By.Name("email")).Click();
+            driver.FindElement(By.Name("email")).Clear();
+            driver.FindElement(By.Name("email")).SendKeys(contract.Email);
+            driver.FindElement(By.Name("email2")).Click();
+            driver.FindElement(By.Name("email2")).Clear();
+            driver.FindElement(By.Name("email2")).SendKeys(contract.Email2);
+            driver.FindElement(By.Name("email3")).Click();
+            driver.FindElement(By.Name("email3")).Clear();
+            driver.FindElement(By.Name("email3")).SendKeys(contract.Email3);
+            driver.FindElement(By.Name("homepage")).Click();
+            driver.FindElement(By.Name("homepage")).Clear();
+            driver.FindElement(By.Name("homepage")).SendKeys(contract.Homepage);
+            driver.FindElement(By.Name("bday")).Click();
+            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("22");
+            driver.FindElement(By.Name("bmonth")).Click();
+            new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText("March");
+            driver.FindElement(By.Name("byear")).Click();
+            driver.FindElement(By.Name("byear")).Clear();
+            driver.FindElement(By.Name("byear")).SendKeys("1987");
+            driver.FindElement(By.Name("aday")).Click();
+            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText("11");
+            driver.FindElement(By.Name("amonth")).Click();
+            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("November");
+            driver.FindElement(By.Name("ayear")).Click();
+            driver.FindElement(By.Name("ayear")).Clear();
+            driver.FindElement(By.Name("ayear")).SendKeys("2022");
+            driver.FindElement(By.Name("new_group")).Click();
+            new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText("1");
+            driver.FindElement(By.Name("theform")).Click();
+            driver.FindElement(By.Name("address2")).Click();
+            driver.FindElement(By.Name("address2")).Clear();
+            driver.FindElement(By.Name("address2")).SendKeys("123");
+            driver.FindElement(By.Name("phone2")).Click();
+            driver.FindElement(By.Name("phone2")).Clear();
+            driver.FindElement(By.Name("phone2")).SendKeys("123");
+            driver.FindElement(By.Name("notes")).Click();
+            driver.FindElement(By.Name("notes")).Clear();
+            driver.FindElement(By.Name("notes")).SendKeys("123");
+        }
+
         private void InitGroupCreation()
+        {
+            driver.FindElement(By.Name("new")).Click();
+        }
+        private void InitContactCreation()
         {
             driver.FindElement(By.Name("new")).Click();
         }
@@ -86,6 +193,10 @@ namespace AddressBook_Web_Tests
         private void GoToGroupsPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+        }
+        private void GoToContractPage()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
         }
 
         private void Login(AccountData account)

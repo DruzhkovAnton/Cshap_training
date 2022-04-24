@@ -13,17 +13,21 @@ namespace addressBookWebTests
         [Test]
         public void addNewGroupTests()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            InitGroupCreation();
             GroupData group = new GroupData("aaa");
             group.Header = "sss";
             group.Footer = "ddd";
-            FillGroupForm(group);
-            SubmitGroupCreation();
-            GoToHomePage();
-            LogOut();
-        }      
+            app.Groups.Create(group);
+            app.Auth.LogOut();
+        }
+
+        [Test]
+        public void addNewEmptyGroupTests()
+        {
+            GroupData group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
+            app.Groups.Create(group);
+            app.Auth.LogOut();
+        }
     }
 }

@@ -15,9 +15,7 @@ namespace addressBookWebTests
         [Test]
         public void addNewContractTests()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToContractPage();
+            
             ContractData contract = new ContractData("aaa", "bbbb");
             contract.Lastname = "sss";
             contract.Nickname = "aaaa";
@@ -27,10 +25,8 @@ namespace addressBookWebTests
             contract.PhoneHome = "1112222";
             contract.Email = "qqqqq";
             contract.Homepage = "www.aaaa.ru";
-            FillContractForm(contract);
-            SubmitContractCreation();
-            GoToHomePage();
-            LogOut();
+            app.Contract.create(contract);
+            app.Auth.LogOut();
         }
     }
 }

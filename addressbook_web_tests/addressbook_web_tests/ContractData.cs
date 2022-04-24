@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addressbook_web_tests
+namespace addressBookWebTests
 {
-    internal class ContractData
+    public class ContractData
     {
         private string firstname;
         private string midlename;

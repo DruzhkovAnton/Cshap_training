@@ -23,6 +23,7 @@ namespace addressBookWebTests
         private string email2 = "";
         private string email3 = "";
         private string homepage = "";
+        private string group = "";
 
 
         public ContractData(string firstname, string midlename)
@@ -114,6 +115,12 @@ namespace addressBookWebTests
         {
             get { return homepage; }
             set { homepage = value; }
+        }
+
+        public string Group
+        {
+            get { return group; }
+            set { group = value; }
         }
     }
 }

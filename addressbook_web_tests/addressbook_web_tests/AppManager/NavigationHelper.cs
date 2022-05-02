@@ -17,6 +17,12 @@ namespace addressBookWebTests
         {
             this.baseURL = baseURL;
         }
+
+        internal void GoToContractPage()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+        }
+
         public void GoToHomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
@@ -29,7 +35,7 @@ namespace addressBookWebTests
 
 
 
-        public void GoToContractPage()
+        public void GoToAddNew()
         {
             driver.FindElement(By.LinkText("add new")).Click();
         }

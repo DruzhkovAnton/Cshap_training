@@ -10,10 +10,10 @@ using OpenQA.Selenium.Support.UI;
 namespace addressBookWebTests
 {
     [TestFixture]
-    public class CreateContactTests : TestBase
+    public class ContractCreationTests : TestBase
     {
         [Test]
-        public void addNewContractTests()
+        public void ContractCreationTest()
         {
             
             ContractData contract = new ContractData("aaa", "bbbb");

@@ -18,6 +18,7 @@ namespace addressBookWebTests.Tests
             newData.Footer = "xxxx";
 
             app.Groups.Modify(1, newData);
+            app.Auth.LogOut();
         }
     }
 }

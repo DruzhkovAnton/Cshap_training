@@ -15,9 +15,34 @@ namespace addressBookWebTests
         {
         }
 
-        public ContractHelper create(ContractData contract)
+        internal ContractHelper Removal(int v)
         {
             manager.Navigator.GoToContractPage();
+            SelectContract(v);
+            RemoveContract();
+            //IsAlertPresent();
+            //CloseAlert();
+            AlertClick();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
+        internal ContractHelper Modify(int v, ContractData newData)
+        {
+            manager.Navigator.GoToContractPage();
+            SelectContract(v);
+            InitContractModification(v);
+            FillContractForm(newData);
+            SubmitContractModification();
+            GoToContractPage();
+            return this;
+        }
+
+
+
+        public ContractHelper create(ContractData contract)
+        {
+            manager.Navigator.GoToAddNew();
             FillContractForm(contract);
             SubmitContractCreation();
             manager.Navigator.GoToHomePage();
@@ -84,8 +109,6 @@ namespace addressBookWebTests
             driver.FindElement(By.Name("ayear")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys("2022");
-            driver.FindElement(By.Name("new_group")).Click();
-            driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.Name("address2")).Click();
             driver.FindElement(By.Name("address2")).Clear();
             driver.FindElement(By.Name("address2")).SendKeys("123");
@@ -99,9 +122,45 @@ namespace addressBookWebTests
 
 
 
+        private ContractHelper GoToContractPage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+            return this;
+        }
+
+        private ContractHelper SubmitContractModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        private ContractHelper InitContractModification(int index)
+        {
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+index+"]/td/a/img[@title = 'Edit']")).Click();
+            return this;
+        }
+
+        private ContractHelper AlertClick()
+        {
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
         public void SubmitContractCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+        }
+
+        private ContractHelper RemoveContract()
+        {
+            driver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
+            return this;
+        }
+
+        private ContractHelper SelectContract(int index)
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/table[@id='maintable']/tbody/tr["+index+"]/td/input")).Click();
+            return this;
         }
     }
 }

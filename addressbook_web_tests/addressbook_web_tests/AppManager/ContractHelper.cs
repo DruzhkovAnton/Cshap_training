@@ -18,24 +18,65 @@ namespace addressBookWebTests
         internal ContractHelper Removal(int v)
         {
             manager.Navigator.GoToContractPage();
-            SelectContract(v);
-            RemoveContract();
-            //IsAlertPresent();
-            //CloseAlert();
-            AlertClick();
-            manager.Navigator.GoToHomePage();
+
+            if (IsElementPresent(By.Name("selected[]")))
+            {
+                SelectContract(v);
+                RemoveContract();
+                AlertClick();
+            }
+            else
+            {
+                ContractData contract = new ContractData("aaa", "bbbb");
+                contract.Lastname = "sss";
+                contract.Nickname = "aaaa";
+                contract.Title = "qqqq";
+                contract.Company = "wwww";
+                contract.Address = "dddd";
+                contract.PhoneHome = "1112222";
+                contract.Email = "qqqqq";
+                contract.Homepage = "www.aaaa.ru";
+                create(contract);
+                SelectContract(v);
+                RemoveContract();
+                AlertClick();
+            }
             return this;
+
         }
 
         internal ContractHelper Modify(int v, ContractData newData)
         {
             manager.Navigator.GoToContractPage();
-            SelectContract(v);
-            InitContractModification(v);
-            FillContractForm(newData);
-            SubmitContractModification();
-            GoToContractPage();
+
+            if (IsElementPresent(By.Name("selected[]")))
+            {
+                SelectContract(v);
+                InitContractModification(v);
+                FillContractForm(newData);
+                SubmitContractModification();
+                ReturnContractPage();
+            }
+            else
+            {
+                ContractData contract = new ContractData("aaa", "bbbb");
+                contract.Lastname = "sss";
+                contract.Nickname = "aaaa";
+                contract.Title = "qqqq";
+                contract.Company = "wwww";
+                contract.Address = "dddd";
+                contract.PhoneHome = "1112222";
+                contract.Email = "qqqqq";
+                contract.Homepage = "www.aaaa.ru";
+                create(contract);
+                SelectContract(v);
+                InitContractModification(v);
+                FillContractForm(newData);
+                SubmitContractModification();
+                ReturnContractPage();
+            }
             return this;
+
         }
 
 
@@ -45,84 +86,44 @@ namespace addressBookWebTests
             manager.Navigator.GoToAddNew();
             FillContractForm(contract);
             SubmitContractCreation();
-            manager.Navigator.GoToHomePage();
+            ReturnContractPage();
             return this;
         }
         public void FillContractForm(ContractData contract)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contract.FirstName);
-            driver.FindElement(By.Name("middlename")).Click();
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(contract.MiddleName);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contract.Lastname);
-            driver.FindElement(By.Name("nickname")).Click();
-            driver.FindElement(By.Name("nickname")).Clear();
-            driver.FindElement(By.Name("nickname")).SendKeys(contract.Nickname);
-            driver.FindElement(By.Name("title")).Click();
-            driver.FindElement(By.Name("title")).Clear();
-            driver.FindElement(By.Name("title")).SendKeys(contract.Title);
-            driver.FindElement(By.Name("company")).Click();
-            driver.FindElement(By.Name("company")).Clear();
-            driver.FindElement(By.Name("company")).SendKeys(contract.Company);
-            driver.FindElement(By.Name("address")).Click();
-            driver.FindElement(By.Name("address")).Clear();
-            driver.FindElement(By.Name("address")).SendKeys(contract.Address);
-            driver.FindElement(By.Name("home")).Click();
-            driver.FindElement(By.Name("home")).Clear();
-            driver.FindElement(By.Name("home")).SendKeys(contract.PhoneHome);
-            driver.FindElement(By.Name("mobile")).Click();
-            driver.FindElement(By.Name("mobile")).Clear();
-            driver.FindElement(By.Name("mobile")).SendKeys(contract.PhoneMobile);
-            driver.FindElement(By.Name("work")).Click();
-            driver.FindElement(By.Name("work")).Clear();
-            driver.FindElement(By.Name("work")).SendKeys(contract.PhoneWork);
-            driver.FindElement(By.Name("fax")).Click();
-            driver.FindElement(By.Name("fax")).Clear();
-            driver.FindElement(By.Name("fax")).SendKeys(contract.PhoneFax);
-            driver.FindElement(By.Name("email")).Click();
-            driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys(contract.Email);
-            driver.FindElement(By.Name("email2")).Click();
-            driver.FindElement(By.Name("email2")).Clear();
-            driver.FindElement(By.Name("email2")).SendKeys(contract.Email2);
-            driver.FindElement(By.Name("email3")).Click();
-            driver.FindElement(By.Name("email3")).Clear();
-            driver.FindElement(By.Name("email3")).SendKeys(contract.Email3);
-            driver.FindElement(By.Name("homepage")).Click();
-            driver.FindElement(By.Name("homepage")).Clear();
-            driver.FindElement(By.Name("homepage")).SendKeys(contract.Homepage);
+            Type(By.Name("firstname"), contract.FirstName);
+            Type(By.Name("middlename"), contract.MiddleName);
+            Type(By.Name("lastname"), contract.Lastname);
+            Type(By.Name("nickname"), contract.Nickname);
+            Type(By.Name("title"), contract.Title);
+            Type(By.Name("company"), contract.Company);
+            Type(By.Name("address"), contract.Address);
+            Type(By.Name("home"), contract.PhoneHome);
+            Type(By.Name("mobile"), contract.PhoneMobile);
+            Type(By.Name("work"), contract.PhoneWork);
+            Type(By.Name("fax"), contract.PhoneFax);
+            Type(By.Name("email"), contract.Email);
+            Type(By.Name("email2"), contract.Email2);
+            Type(By.Name("email3"), contract.Email3);
+            Type(By.Name("homepage"), contract.PhoneFax);
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("22");
             driver.FindElement(By.Name("bmonth")).Click();
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText("March");
-            driver.FindElement(By.Name("byear")).Click();
-            driver.FindElement(By.Name("byear")).Clear();
-            driver.FindElement(By.Name("byear")).SendKeys("1987");
+            Type(By.Name("byear"), "1987");
             driver.FindElement(By.Name("aday")).Click();
             new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText("11");
             driver.FindElement(By.Name("amonth")).Click();
             new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("November");
-            driver.FindElement(By.Name("ayear")).Click();
-            driver.FindElement(By.Name("ayear")).Clear();
-            driver.FindElement(By.Name("ayear")).SendKeys("2022");
-            driver.FindElement(By.Name("address2")).Click();
-            driver.FindElement(By.Name("address2")).Clear();
-            driver.FindElement(By.Name("address2")).SendKeys("123");
-            driver.FindElement(By.Name("phone2")).Click();
-            driver.FindElement(By.Name("phone2")).Clear();
-            driver.FindElement(By.Name("phone2")).SendKeys("123");
-            driver.FindElement(By.Name("notes")).Click();
-            driver.FindElement(By.Name("notes")).Clear();
-            driver.FindElement(By.Name("notes")).SendKeys("123");
+            Type(By.Name("ayear"), "2022");
+            Type(By.Name("address2"), "123");
+            Type(By.Name("phone2"), "123");
+            Type(By.Name("notes"), "123");
         }
 
 
 
-        private ContractHelper GoToContractPage()
+        private ContractHelper ReturnContractPage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
             return this;

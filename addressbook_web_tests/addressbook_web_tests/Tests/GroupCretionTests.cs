@@ -1,14 +1,10 @@
-using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
 using NUnit.Framework;
 
 
 namespace addressBookWebTests
 {
     [TestFixture]
-    public class GroupCretionTests : TestBase
+    public class GroupCretionTests : AuthTestBase
     {
         [Test]
         public void addNewGroupTests()
@@ -17,7 +13,7 @@ namespace addressBookWebTests
             group.Header = "sss";
             group.Footer = "ddd";
             app.Groups.Create(group);
-            app.Auth.LogOut();
+            //app.Auth.LogOut();
         }
 
         [Test]

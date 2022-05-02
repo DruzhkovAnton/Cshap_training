@@ -1,21 +1,16 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace addressBookWebTests.Tests
+namespace addressBookWebTests
 {
     [TestFixture]
-    public class ContractCreationTests : TestBase
+    public class ContractModifitationTests : AuthTestBase
     {
         [Test]
-        public void ContractCreationTest()
+        public void ContractModificationTest()
         {
 
             ContractData newData = new ContractData("zzz", "xxx");
-            newData.Lastname = "ccc";
+            newData.Lastname = "ccc1";
             newData.Nickname = "vvv";
             newData.Title = "111";
             newData.Company = "222";

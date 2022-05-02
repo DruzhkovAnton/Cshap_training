@@ -18,21 +18,52 @@ namespace addressBookWebTests
         public GroupHelper Remove(int p)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroups(p);
-            RemoveGroup();
-            ReturnToGroupsPage();
-            manager.Navigator.GoToHomePage();
+
+            if (IsElementPresent(By.ClassName("group")))
+            {
+                SelectGroups(p);
+                RemoveGroup();
+                ReturnToGroupsPage();
+            }
+            else
+            {
+                GroupData group = new GroupData("RemoveTest");
+                group.Header = "111";
+                group.Footer = "111";
+                Create(group);
+                SelectGroups(p);
+                RemoveGroup();
+                ReturnToGroupsPage();
+
+            }
+
             return this;
         }
 
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroups(v);
-            InitGroupModification();
-            FillGroupForm(newData);
-            SubmitGroupModification();
-            ReturnToGroupsPage();
+            if (IsElementPresent(By.ClassName("group")))
+            {
+                SelectGroups(v);
+                InitGroupModification();
+                FillGroupForm(newData);
+                SubmitGroupModification();
+                ReturnToGroupsPage();
+            }
+            else
+            {
+                GroupData group = new GroupData("modifyTest");
+                group.Header = "111";
+                group.Footer = "111";
+                Create(group);
+                SelectGroups(v);
+                InitGroupModification();
+                FillGroupForm(newData);
+                SubmitGroupModification();
+                ReturnToGroupsPage();
+
+            }
             return this;
         }
 
@@ -63,17 +94,14 @@ namespace addressBookWebTests
 
         public GroupHelper FillGroupForm(GroupData group)
         {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+
+            Type(By.Name("group_name"), group.Name);
+            Type(By.Name("group_header"), group.Header);
+            Type(By.Name("group_footer"), group.Footer);
             return this;
         }
+
+
 
         public GroupHelper InitGroupCreation()
         {

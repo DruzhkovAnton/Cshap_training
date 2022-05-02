@@ -1,14 +1,9 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace addressBookWebTests.Tests
+namespace addressBookWebTests
 {
     [TestFixture]
-    public class ContractRemovalTests : TestBase
+    public class ContractRemovalTests : AuthTestBase
     {
         [Test]
         public void ContractRemovalTest()

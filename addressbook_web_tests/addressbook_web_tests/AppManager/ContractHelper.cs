@@ -45,6 +45,13 @@ namespace addressBookWebTests
 
         }
 
+        internal bool IsContractCreate(int v)
+        {
+            manager.Navigator.GoToContractPage();
+            return IsElementPresent(By.XPath("//*[@id='maintable']/tbody/tr[" + v + "]/td/a/img[@title = 'Edit']"));
+
+        }
+
         internal ContractHelper Modify(int v, ContractData newData)
         {
             manager.Navigator.GoToContractPage();

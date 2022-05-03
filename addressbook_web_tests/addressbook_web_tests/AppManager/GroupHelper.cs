@@ -18,56 +18,28 @@ namespace addressBookWebTests
         public GroupHelper Remove(int p)
         {
             manager.Navigator.GoToGroupsPage();
-
-            if (IsElementPresent(By.ClassName("group")))
-            {
-                SelectGroups(p);
-                RemoveGroup();
-                ReturnToGroupsPage();
-            }
-            else
-            {
-                GroupData group = new GroupData("RemoveTest");
-                group.Header = "111";
-                group.Footer = "111";
-                Create(group);
-                SelectGroups(p);
-                RemoveGroup();
-                ReturnToGroupsPage();
-
-            }
-
+            SelectGroups(p);
+            RemoveGroup();
+            ReturnToGroupsPage();
             return this;
         }
 
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            if (IsElementPresent(By.ClassName("group")))
-            {
-                SelectGroups(v);
-                InitGroupModification();
-                FillGroupForm(newData);
-                SubmitGroupModification();
-                ReturnToGroupsPage();
-            }
-            else
-            {
-                GroupData group = new GroupData("modifyTest");
-                group.Header = "111";
-                group.Footer = "111";
-                Create(group);
-                SelectGroups(v);
-                InitGroupModification();
-                FillGroupForm(newData);
-                SubmitGroupModification();
-                ReturnToGroupsPage();
-
-            }
+            SelectGroups(v);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
             return this;
         }
 
-
+        public bool IsGroupCreate(int index)
+        {
+            manager.Navigator.GoToGroupsPage();
+            return !IsElementPresent(By.XPath("//div[@id='content']/form/span[" + index + "]/input"));
+        }
 
         public GroupHelper Create(GroupData group)
         {

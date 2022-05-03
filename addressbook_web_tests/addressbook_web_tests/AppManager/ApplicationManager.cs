@@ -31,6 +31,9 @@ namespace addressBookWebTests
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contractHelper = new ContractHelper(this);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+
         }
 
         ~ApplicationManager()

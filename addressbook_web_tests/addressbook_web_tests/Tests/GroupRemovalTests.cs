@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-
+using System.Collections.Generic;
 
 namespace addressBookWebTests
 {
@@ -19,14 +19,22 @@ namespace addressBookWebTests
 
             //}
 
-            if (app.Groups.IsGroupCreate(1))
+            if (app.Groups.IsGroupCreate(0))
             {
                 GroupData group = new GroupData("удаление");
                 group.Header = "";
                 group.Footer = "";
                 app.Groups.Create(group);
             }
-            app.Groups.Remove(1);
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Remove(0);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            oldGroups.RemoveAt(0);
+            Assert.AreEqual(oldGroups, newGroups);
+
             app.Auth.LogOut();
         }
 

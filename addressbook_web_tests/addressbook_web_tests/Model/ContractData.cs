@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace addressBookWebTests
 {
-    public class ContractData
+    public class ContractData : IEquatable<ContractData>, IComparable<ContractData>
     {
         private string firstname;
-        private string midlename;
-        private string lastname = "";
+        private string lastname;
+        private string midlename = "";
         private string nickname = "";
         private string title = "";
         private string cpmpany = "";
@@ -26,10 +26,33 @@ namespace addressBookWebTests
         private string group = "";
 
 
-        public ContractData(string firstname, string midlename)
+        public ContractData(string firstname, string lastname)
         {
             this.firstname = firstname;
-            this.midlename = midlename;
+            this.lastname = lastname;
+        }
+
+        public bool Equals(ContractData other)
+        {
+            if (object.ReferenceEquals(other, null)) { return false; }
+            if (object.ReferenceEquals(this, other)) { return true; }
+            return FirstName == other.FirstName && Lastname == other.lastname;
+        }
+
+        public override int GetHashCode()
+        {
+            return FirstName.GetHashCode() ^ Lastname.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "firstName=" + FirstName + ", " + "lastname=" + Lastname;
+        }
+
+        public int CompareTo(ContractData other)
+        {
+            if (object.ReferenceEquals (other, null)) { return 1; }
+            return FirstName.CompareTo(other.FirstName) + Lastname.CompareTo(other.lastname);
         }
 
         public string FirstName

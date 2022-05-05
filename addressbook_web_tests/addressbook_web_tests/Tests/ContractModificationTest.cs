@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace addressBookWebTests
 {
@@ -10,7 +11,7 @@ namespace addressBookWebTests
         {
 
             ContractData newData = new ContractData("ModifyContract", "xxx");
-            newData.Lastname = "ccc1";
+            newData.MiddleName = "ccc1";
             newData.Nickname = "vvv";
             newData.Title = "111";
             newData.Company = "222";
@@ -22,7 +23,7 @@ namespace addressBookWebTests
             if (app.Contract.IsContractCreate(2))
             {
                 ContractData contract = new ContractData("NewContract", "xxx");
-                contract.Lastname = "ccc1";
+                contract.MiddleName = "ccc1";
                 contract.Nickname = "vvv";
                 contract.Title = "111";
                 contract.Company = "222";
@@ -31,7 +32,18 @@ namespace addressBookWebTests
                 contract.Email = "5555";
                 contract.Homepage = "www.jjjj.ru";
             }
-            app.Contract.Modify(2, newData);
+
+            List<ContractData> oldContracts = app.Contract.GetContractList();
+
+            app.Contract.Modify(0, newData);
+
+            List<ContractData> newContracts = app.Contract.GetContractList();
+            oldContracts[0].FirstName = newData.FirstName;
+            oldContracts[0].Lastname = newData.Lastname;
+            oldContracts.Sort();
+            newContracts.Sort();
+            Assert.AreEqual(oldContracts, newContracts);
+
             app.Auth.LogOut();
         }
 

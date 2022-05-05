@@ -11,77 +11,52 @@ namespace addressBookWebTests
 {
     public class ContractHelper : HelperBase
     {
+
         public ContractHelper(ApplicationManager manager) : base(manager)
         {
+        }
+
+
+        public List<ContractData> GetContractList()
+        {
+            List<ContractData> contracts = new List<ContractData>();
+            manager.Navigator.GoToContractPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+            foreach (IWebElement element in elements)
+            {
+                contracts.Add(new ContractData(element.FindElement(By.XPath("./td[3]")).Text,
+                                               element.FindElement(By.XPath("./td[2]")).Text));
+            }
+
+            return contracts;
         }
 
         internal ContractHelper Removal(int v)
         {
             manager.Navigator.GoToContractPage();
-
-            if (IsElementPresent(By.Name("selected[]")))
-            {
-                SelectContract(v);
-                RemoveContract();
-                AlertClick();
-            }
-            else
-            {
-                ContractData contract = new ContractData("aaa", "bbbb");
-                contract.Lastname = "sss";
-                contract.Nickname = "aaaa";
-                contract.Title = "qqqq";
-                contract.Company = "wwww";
-                contract.Address = "dddd";
-                contract.PhoneHome = "1112222";
-                contract.Email = "qqqqq";
-                contract.Homepage = "www.aaaa.ru";
-                create(contract);
-                SelectContract(v);
-                RemoveContract();
-                AlertClick();
-            }
+            SelectContract(v);
+            RemoveContract();
+            AlertClick();
             return this;
 
         }
 
+ 
         internal bool IsContractCreate(int v)
         {
             manager.Navigator.GoToContractPage();
-            return IsElementPresent(By.XPath("//*[@id='maintable']/tbody/tr[" + v + "]/td/a/img[@title = 'Edit']"));
+            return IsElementPresent(By.XPath("//*[@id='maintable']/tbody/tr[" + (v+2) + "]/td/a/img[@title = 'Edit']"));
 
         }
 
         internal ContractHelper Modify(int v, ContractData newData)
         {
             manager.Navigator.GoToContractPage();
-
-            if (IsElementPresent(By.Name("selected[]")))
-            {
-                SelectContract(v);
-                InitContractModification(v);
-                FillContractForm(newData);
-                SubmitContractModification();
-                ReturnContractPage();
-            }
-            else
-            {
-                ContractData contract = new ContractData("aaa", "bbbb");
-                contract.Lastname = "sss";
-                contract.Nickname = "aaaa";
-                contract.Title = "qqqq";
-                contract.Company = "wwww";
-                contract.Address = "dddd";
-                contract.PhoneHome = "1112222";
-                contract.Email = "qqqqq";
-                contract.Homepage = "www.aaaa.ru";
-                create(contract);
-                SelectContract(v);
-                InitContractModification(v);
-                FillContractForm(newData);
-                SubmitContractModification();
-                ReturnContractPage();
-            }
+            SelectContract(v);
+            InitContractModification(v);
+            FillContractForm(newData);
+            SubmitContractModification();
+            ReturnContractPage();
             return this;
 
         }
@@ -144,7 +119,7 @@ namespace addressBookWebTests
 
         private ContractHelper InitContractModification(int index)
         {
-            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+index+"]/td/a/img[@title = 'Edit']")).Click();
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+(index+2)+"]/td/a/img[@title = 'Edit']")).Click();
             return this;
         }
 
@@ -167,7 +142,7 @@ namespace addressBookWebTests
 
         private ContractHelper SelectContract(int index)
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/table[@id='maintable']/tbody/tr["+index+"]/td/input")).Click();
+            driver.FindElement(By.XPath("//div[@id='content']/form/table[@id='maintable']/tbody/tr["+(index+2)+"]/td/input")).Click();
             return this;
         }
     }

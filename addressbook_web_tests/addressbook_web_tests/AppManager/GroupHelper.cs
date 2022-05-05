@@ -11,6 +11,18 @@ namespace addressBookWebTests
 {
     public class GroupHelper : HelperBase
     {
+        public List<GroupData> GetGroupList()
+        {
+            List < GroupData > groups = new List<GroupData>();
+            manager.Navigator.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
+        }
+
         public GroupHelper(ApplicationManager manager) : base(manager)
         {
         }
@@ -38,7 +50,7 @@ namespace addressBookWebTests
         public bool IsGroupCreate(int index)
         {
             manager.Navigator.GoToGroupsPage();
-            return !IsElementPresent(By.XPath("//div[@id='content']/form/span[" + index + "]/input"));
+            return !IsElementPresent(By.XPath("//div[@id='content']/form/span[" + (index+1) + "]/input"));
         }
 
         public GroupHelper Create(GroupData group)
@@ -59,7 +71,7 @@ namespace addressBookWebTests
 
         public GroupHelper SelectGroups(int index)
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + (index+1) + "]/input")).Click();
             return this;
         }
 

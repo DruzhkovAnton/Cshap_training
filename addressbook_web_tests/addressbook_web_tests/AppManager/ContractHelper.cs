@@ -16,27 +16,39 @@ namespace addressBookWebTests
         {
         }
 
+        private List<ContractData> contractCache = null;
 
         public List<ContractData> GetContractList()
         {
-            List<ContractData> contracts = new List<ContractData>();
-            manager.Navigator.GoToContractPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
-            foreach (IWebElement element in elements)
+            if (contractCache == null)
             {
-                contracts.Add(new ContractData(element.FindElement(By.XPath("./td[3]")).Text,
-                                               element.FindElement(By.XPath("./td[2]")).Text));
+                contractCache = new List<ContractData>();
+                manager.Navigator.GoToContractPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+                foreach (IWebElement element in elements)
+                {
+                    contractCache.Add(new ContractData(element.FindElement(By.XPath("./td[3]")).Text,
+                                                       element.FindElement(By.XPath("./td[2]")).Text)
+                    {
+                        Id = element.FindElement(By.Name("selected[]")).GetAttribute("value")
+                    });
+                }
             }
-
-            return contracts;
+            return new List<ContractData>(contractCache);
         }
 
-        internal ContractHelper Removal(int v)
+        public int GetContractCount()
+        {
+            return driver.FindElements(By.XPath("//tr[@name='entry']")).Count;
+        }
+
+        internal ContractHelper Remove(int v)
         {
             manager.Navigator.GoToContractPage();
             SelectContract(v);
             RemoveContract();
             AlertClick();
+            manager.Navigator.GoToContractPage();
             return this;
 
         }
@@ -45,7 +57,7 @@ namespace addressBookWebTests
         internal bool IsContractCreate(int v)
         {
             manager.Navigator.GoToContractPage();
-            return IsElementPresent(By.XPath("//*[@id='maintable']/tbody/tr[" + (v+2) + "]/td/a/img[@title = 'Edit']"));
+            return !IsElementPresent(By.XPath("//*[@id='maintable']/tbody/tr[" + (v+2) + "]/td/a/img[@title = 'Edit']"));
 
         }
 
@@ -114,6 +126,7 @@ namespace addressBookWebTests
         private ContractHelper SubmitContractModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contractCache = null;
             return this;
         }
 
@@ -129,14 +142,17 @@ namespace addressBookWebTests
             return this;
         }
 
-        public void SubmitContractCreation()
+        private ContractHelper SubmitContractCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            contractCache = null;
+            return this;
         }
 
         private ContractHelper RemoveContract()
         {
             driver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
+            contractCache = null;
             return this;
         }
 

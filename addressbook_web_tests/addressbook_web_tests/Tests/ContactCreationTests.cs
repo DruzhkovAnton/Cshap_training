@@ -24,7 +24,9 @@ namespace addressBookWebTests
 
             app.Contract.create(contract);
 
-            List<ContractData> newContracts = app.Contract.GetContractList();
+            Assert.AreEqual(oldContracts.Count + 1, app.Contract.GetContractCount());
+
+            List <ContractData> newContracts = app.Contract.GetContractList();
             oldContracts.Add(contract);
             oldContracts.Sort();
             newContracts.Sort();

@@ -28,15 +28,15 @@ namespace addressBookWebTests
 
         public ContractData(string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            FirstName = firstname;
+            Lastname = lastname;
         }
 
         public bool Equals(ContractData other)
         {
             if (object.ReferenceEquals(other, null)) { return false; }
             if (object.ReferenceEquals(this, other)) { return true; }
-            return FirstName == other.FirstName && Lastname == other.lastname;
+            return FirstName == other.FirstName && Lastname == other.Lastname;
         }
 
         public override int GetHashCode()
@@ -52,98 +52,41 @@ namespace addressBookWebTests
         public int CompareTo(ContractData other)
         {
             if (object.ReferenceEquals (other, null)) { return 1; }
-            return FirstName.CompareTo(other.FirstName) + Lastname.CompareTo(other.lastname);
+            return FirstName.CompareTo(other.FirstName) + Lastname.CompareTo(other.Lastname);
         }
 
-        public string FirstName
-        {
-            get { return firstname; }
-            set { firstname = value; }
-        }
+        public string Id { get; set; }
 
-        public string MiddleName
-        {
-            get { return midlename; }
-            set { midlename = value; }
-        }
+        public string FirstName { get; set; }
 
-        public string Lastname
-        {
-            get { return lastname; }
-            set { lastname = value; }
-        }
+        public string MiddleName { get; set; }
 
-        public string Nickname
-        {
-            get { return nickname; }
-            set { nickname = value; }
-        }
+        public string Lastname { get; set; }
 
-        public string Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
+        public string Nickname { get; set; }
 
-        public string Company
-        {
-            get { return cpmpany; }
-            set { cpmpany = value; }
-        }
+        public string Title { get; set; }
 
-        public string Address
-        {
-            get { return address; }
-            set { address = value; }
-        }
+        public string Company { get; set; }
 
-        public string PhoneHome
-        {
-            get { return phonehome; }
-            set { phonehome = value; }
-        }
+        public string Address { get; set; }
 
-        public string PhoneMobile
-        {
-            get { return phonemobile; }
-            set { phonemobile = value; }
-        }
-        public string PhoneWork
-        {
-            get { return phonework; }
-            set { phonework = value; }
-        }
-        public string PhoneFax
-        {
-            get { return phonefax; }
-            set { phonefax = value; }
-        }
-        public string Email
-        {
-            get { return email; }
-            set { email = value; }
-        }
-        public string Email2
-        {
-            get { return email2; }
-            set { email2 = value; }
-        }
-        public string Email3
-        {
-            get { return email3; }
-            set { email3 = value; }
-        }
+        public string PhoneHome { get; set; }
 
-        public string Homepage
-        {
-            get { return homepage; }
-            set { homepage = value; }
-        }
+        public string PhoneMobile { get; set; }
 
-        public string Group
-        {
-            get { return group; }
-            set { group = value; }
-        }
+        public string PhoneWork { get; set; }
+
+        public string PhoneFax { get; set; }
+
+        public string Email { get; set; }
+
+        public string Email2 { get; set; }
+
+        public string Email3 { get; set; }
+
+        public string Homepage { get; set; }
+
+        public string Group { get; set; }
     }
 }

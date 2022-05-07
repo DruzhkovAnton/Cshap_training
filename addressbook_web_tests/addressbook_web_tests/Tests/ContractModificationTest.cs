@@ -31,11 +31,14 @@ namespace addressBookWebTests
                 contract.PhoneHome = "44444";
                 contract.Email = "5555";
                 contract.Homepage = "www.jjjj.ru";
+                app.Contract.create(contract);
             }
 
             List<ContractData> oldContracts = app.Contract.GetContractList();
 
             app.Contract.Modify(0, newData);
+
+            Assert.AreEqual(oldContracts.Count, app.Contract.GetContractCount());
 
             List<ContractData> newContracts = app.Contract.GetContractList();
             oldContracts[0].FirstName = newData.FirstName;

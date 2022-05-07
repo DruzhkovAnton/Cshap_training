@@ -20,17 +20,24 @@ namespace addressBookWebTests
                 contract.PhoneHome = "44444";
                 contract.Email = "5555";
                 contract.Homepage = "www.jjjj.ru";
+                app.Contract.create(contract);
             }
 
             List<ContractData> oldContracts = app.Contract.GetContractList();
 
-            app.Contract.Removal(0);
+            app.Contract.Remove(0);
+            Assert.AreEqual(oldContracts.Count-1, app.Contract.GetContractCount());
 
             List<ContractData> newContracts = app.Contract.GetContractList();
+
+            ContractData toBeRemoved = oldContracts[0];
             oldContracts.RemoveAt(0);
-            oldContracts.Sort();
-            newContracts.Sort();
             Assert.AreEqual(oldContracts, newContracts);
+
+            foreach (ContractData contract in newContracts)
+            {
+                Assert.AreNotEqual(contract.Id, toBeRemoved.Id);
+            }
 
             app.Auth.LogOut();
         }

@@ -51,8 +51,15 @@ namespace addressBookWebTests
 
         public int CompareTo(ContractData other)
         {
-            if (object.ReferenceEquals (other, null)) { return 1; }
-            return FirstName.CompareTo(other.FirstName) + Lastname.CompareTo(other.Lastname);
+            if (object.ReferenceEquals (other.FirstName, null))
+            {
+                if (object.ReferenceEquals(other.Lastname, null))
+                {
+                    return 1;
+                }
+                return Lastname.CompareTo(other.Lastname);
+            }
+            return FirstName.CompareTo(other.FirstName);
         }
 
         public string Id { get; set; }

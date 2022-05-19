@@ -53,13 +53,14 @@ namespace addressBookWebTests
         {
             if (object.ReferenceEquals (other.FirstName, null))
             {
-                if (object.ReferenceEquals(other.Lastname, null))
-                {
-                    return 1;
-                }
-                return Lastname.CompareTo(other.Lastname);
+                return FirstName.CompareTo(other.FirstName);
             }
-            return FirstName.CompareTo(other.FirstName);
+            if (object.ReferenceEquals(other.Lastname, null))
+            {
+                return FirstName.CompareTo(other.Lastname);
+            }
+            return 1;
+            
         }
 
         public string Id { get; set; }

@@ -24,7 +24,8 @@ namespace addressBookWebTests
         private string email3 = "";
         private string homepage = "";
         private string group = "";
-
+        private string allPhones;
+        private string allEmails;
 
         public ContractData(string firstname, string lastname)
         {
@@ -87,7 +88,55 @@ namespace addressBookWebTests
 
         public string PhoneWork { get; set; }
 
+        public string Phone2 { get; set; }
+
         public string PhoneFax { get; set; }
+
+        public string AllPhones 
+        { get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (cleanUp(PhoneHome) + cleanUp(PhoneMobile) + cleanUp(PhoneWork) + cleanUp(Phone2)).Trim();
+                }
+            }
+            set 
+            {
+                allPhones = value;
+            } 
+        }
+
+        public string AllEmails
+        {
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (cleanUp(Email) + cleanUp(Email2) + cleanUp(Email3)).Trim();
+                }
+            }
+            set
+            {
+                allEmails = value;
+            }
+        }
+
+        private string cleanUp(string text)
+        {
+            if (text == null || text == "")
+            {
+                return "";
+            }
+            return text.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+        }
 
         public string Email { get; set; }
 

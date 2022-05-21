@@ -16,6 +16,61 @@ namespace addressBookWebTests
         {
         }
 
+        internal ContractData GetContactInformationFromTable(int index)
+        {
+            manager.Navigator.GoToHomePage();
+
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"));
+            string lastName = cells[1].Text;
+            string firstName = cells[2].Text;
+            string address = cells[3].Text;
+            string allEmail = cells[4].Text;
+            string allPhone = cells[5].Text;
+
+
+
+            return new ContractData(firstName, lastName)
+            {
+                Address = address,
+                AllPhones = allPhone,
+                AllEmails = allEmail
+            };
+        }
+
+        public ContractData GetContactInformationFromEditForm(int index)
+        {
+            manager.Navigator.GoToContractPage();
+            InitContractModification(index);
+            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string addres = driver.FindElement(By.Name("address")).GetAttribute("value");
+
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+
+            return new ContractData(firstName, lastName)
+            {
+                Address = addres,
+
+                PhoneHome = homePhone,
+                PhoneMobile = mobilePhone,
+                PhoneWork = workPhone,
+                Phone2 = phone2,
+
+                Email = email,
+                Email2 = email2,
+                Email3 = email3
+            };
+
+        }
+
         private List<ContractData> contractCache = null;
 
         public List<ContractData> GetContractList()
@@ -99,20 +154,20 @@ namespace addressBookWebTests
             Type(By.Name("email"), contract.Email);
             Type(By.Name("email2"), contract.Email2);
             Type(By.Name("email3"), contract.Email3);
-            Type(By.Name("homepage"), contract.PhoneFax);
-            driver.FindElement(By.Name("bday")).Click();
-            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("22");
-            driver.FindElement(By.Name("bmonth")).Click();
-            new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText("March");
-            Type(By.Name("byear"), "1987");
-            driver.FindElement(By.Name("aday")).Click();
-            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText("11");
-            driver.FindElement(By.Name("amonth")).Click();
-            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("November");
-            Type(By.Name("ayear"), "2022");
-            Type(By.Name("address2"), "123");
+            //Type(By.Name("homepage"), contract.PhoneFax);
+            //driver.FindElement(By.Name("bday")).Click();
+            //new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("22");
+            //driver.FindElement(By.Name("bmonth")).Click();
+            //new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText("March");
+            //Type(By.Name("byear"), "1987");
+            //driver.FindElement(By.Name("aday")).Click();
+            //new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText("11");
+            //driver.FindElement(By.Name("amonth")).Click();
+            //new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("November");
+            //Type(By.Name("ayear"), "2022");
+            //Type(By.Name("address2"), "123");
             Type(By.Name("phone2"), "123");
-            Type(By.Name("notes"), "123");
+            //Type(By.Name("notes"), "123");
         }
 
 
@@ -132,7 +187,9 @@ namespace addressBookWebTests
 
         private ContractHelper InitContractModification(int index)
         {
-            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+(index+2)+"]/td/a/img[@title = 'Edit']")).Click();
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
             return this;
         }
 

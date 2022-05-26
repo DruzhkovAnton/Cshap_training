@@ -102,7 +102,11 @@ namespace addressBookWebTests
                 if (mobilePhone != null && mobilePhone != "") { mobilePhone = "M: " + mobilePhone + "\r\n"; }
                 if (workPhone != null && workPhone != "") { workPhone = "W: " + workPhone + "\r\n"; }
                 if (fax != null && fax != "") { fax = "F: " + fax + "\r\n"; }
+                if (email != null && email !="") { email = email + "\r\n"; }
+                if (email2 != null && email2 !="") { email2 = email2 + "\r\n"; }
+                if (email3 != null && email3 !="") { email3 = email3 + "\r\n"; }
                 if (homePage!= null && homePage != "") { homePage = "Homepage:\r\n" + homePage + "\r\n"; }
+
             }
 
 
@@ -232,7 +236,7 @@ namespace addressBookWebTests
             //new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("November");
             //Type(By.Name("ayear"), "2022");
             //Type(By.Name("address2"), "123");
-            Type(By.Name("phone2"), "123");
+            //Type(By.Name("phone2"), "123");
             //Type(By.Name("notes"), "123");
         }
 

@@ -191,9 +191,9 @@ namespace addressBookWebTests
                           + PhoneWork 
                           + PhoneFax 
                           + "\r\n"
-                          + Email + "\r\n"
-                          + Email2 + "\r\n"
-                          + Email3 + "\r\n"
+                          + Email
+                          + Email2 
+                          + Email3 
                           + Homepage + "\r\n"
                           + "\r\n"
                           + "\r\n"

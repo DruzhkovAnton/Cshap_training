@@ -196,7 +196,7 @@ namespace addressBookWebTests
 
 
 
-        public ContractHelper create(ContractData contract)
+        public ContractHelper Сreate(ContractData contract)
         {
             manager.Navigator.GoToAddNew();
             FillContractForm(contract);

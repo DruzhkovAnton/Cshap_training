@@ -28,7 +28,7 @@ namespace addressBookWebTests
 
         public  string Tostring()
         {
-            return "name=" + Name;
+            return "name=" + Name + "\n" + "footer=" + Footer + "\n" + "header=" + Header;
         }
 
         public int CompareTo(GroupData other)

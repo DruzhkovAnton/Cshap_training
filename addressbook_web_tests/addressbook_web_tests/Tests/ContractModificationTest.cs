@@ -31,7 +31,7 @@ namespace addressBookWebTests
                 contract.PhoneHome = "44444";
                 contract.Email = "5555";
                 contract.Homepage = "www.jjjj.ru";
-                app.Contract.create(contract);
+                app.Contract.Сreate(contract);
             }
 
             List<ContractData> oldContracts = app.Contract.GetContractList();

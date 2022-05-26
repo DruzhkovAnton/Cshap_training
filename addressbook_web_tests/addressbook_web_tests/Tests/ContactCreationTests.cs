@@ -6,23 +6,37 @@ namespace addressBookWebTests
     [TestFixture]
     public class ContractCreationTests : AuthTestBase
     {
-        [Test]
-        public void ContractCreationTest()
+        public static IEnumerable<ContractData> RandomContractDataProvider()
         {
-            
-            ContractData contract = new ContractData("aaa", "bbbb");
-            contract.MiddleName = "sss";
-            contract.Nickname = "aaaa";
-            contract.Title = "qqqq";
-            contract.Company = "wwww";
-            contract.Address = "dddd";
-            contract.PhoneHome = "1112222";
-            contract.Email = "qqqqq";
-            contract.Homepage = "www.aaaa.ru";
+            List<ContractData> contracts = new List<ContractData>();
+            for (int i = 0; i < 5; i++)
+            {
+                contracts.Add(new ContractData(GenerateRandomString(10), GenerateRandomString(10))
+                {
+                    MiddleName = GenerateRandomString(10),
+                    Nickname = GenerateRandomString(10),
+                    Title = GenerateRandomString(10),
+                    Company = GenerateRandomString(10),
+                    Address = GenerateRandomString(10),
+                    PhoneHome = GenerateRandomString(10),
+                    PhoneMobile = GenerateRandomString(10),
+                    PhoneWork = GenerateRandomString(10),
+                    PhoneFax = GenerateRandomString(10),
+                    Email = GenerateRandomString(10),
+                    Email2 = GenerateRandomString(10),
+                    Email3 = GenerateRandomString(10),
+                    Homepage = GenerateRandomString(10)
+                });
+            }
+            return contracts;
+        }
 
+        [Test, TestCaseSource("RandomContractDataProvider")]
+        public void ContractCreationTest(ContractData contract)
+        {
             List<ContractData> oldContracts = app.Contract.GetContractList();
 
-            app.Contract.create(contract);
+            app.Contract.Сreate(contract);
 
             Assert.AreEqual(oldContracts.Count + 1, app.Contract.GetContractCount());
 

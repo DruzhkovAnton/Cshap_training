@@ -9,7 +9,7 @@ namespace addressBookWebTests
         public static IEnumerable<ContractData> RandomContractDataProvider()
         {
             List<ContractData> contracts = new List<ContractData>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 contracts.Add(new ContractData(GenerateRandomString(10), GenerateRandomString(10))
                 {

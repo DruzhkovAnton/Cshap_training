@@ -10,7 +10,7 @@ namespace addressBookWebTests
         public static IEnumerable<GroupData> RandomGroupDataProvaider()
         {
             List<GroupData> groups = new List<GroupData>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 groups.Add(new GroupData(GenerateRandomString(30))
                 {

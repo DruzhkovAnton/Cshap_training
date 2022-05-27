@@ -14,8 +14,8 @@ namespace addressBookWebTests
             {
                 groups.Add(new GroupData(GenerateRandomString(30))
                 {
-                    Header = GenerateRandomString(100),
-                    Footer = GenerateRandomString(100)
+                    Header = GenerateRandomString(10),
+                    Footer = GenerateRandomString(10)
                 });
             }
             return groups;
@@ -32,7 +32,7 @@ namespace addressBookWebTests
 
         }
 
-        [Test, TestCaseSource("RandomGroupDataProvaider1")]
+        [Test, TestCaseSource("RandomGroupDataProvaider")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();

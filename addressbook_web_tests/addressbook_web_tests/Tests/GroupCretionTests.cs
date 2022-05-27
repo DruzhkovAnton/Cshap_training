@@ -21,7 +21,18 @@ namespace addressBookWebTests
             return groups;
         }
 
-        [Test, TestCaseSource("RandomGroupDataProvaider")]
+        public static IEnumerable<GroupData> GroupDataFromFile()
+        {
+            List<GroupData> groups = new List<GroupData>();
+
+
+
+            return groups;
+
+
+        }
+
+        [Test, TestCaseSource("RandomGroupDataProvaider1")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();

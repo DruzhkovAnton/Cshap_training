@@ -95,17 +95,40 @@ namespace addressBookWebTests
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value").Trim();
 
             string homePage = driver.FindElement(By.Name("homepage")).GetAttribute("value").Trim();
+            string fio = null;
+            string subInfo = null;
+            string allPhoneDetails = null;
+            string allEmailsDetails = null;
 
             if (flag == 0) 
             {
+                if (firstName != null && firstName != "") { firstName = firstName + " "; }
+                if (midleName != null && midleName != "") { midleName = midleName + " "; }
+                fio = firstName + midleName + lastName;
+                if (fio!=null && fio != "") { fio = fio + "\r\n"; }
+
+                if (nickName != null && nickName != "") { nickName = nickName + "\r\n"; }
+                if (title != null && title != "") { title = title + "\r\n"; }
+                if (company != null && company != "") { company = company + "\r\n"; }
+                if (address != null && address != "") { address = address + "\r\n"; }
+                subInfo = nickName + title + company + address;
+                if (subInfo != null && subInfo != "") { subInfo = subInfo + "\r\n"; }
+
                 if (homePhone != null && homePhone != "") { homePhone = "H: "+homePhone + "\r\n"; }
                 if (mobilePhone != null && mobilePhone != "") { mobilePhone = "M: " + mobilePhone + "\r\n"; }
                 if (workPhone != null && workPhone != "") { workPhone = "W: " + workPhone + "\r\n"; }
                 if (fax != null && fax != "") { fax = "F: " + fax + "\r\n"; }
+                allPhoneDetails = homePhone + mobilePhone + workPhone + fax;
+                if (allPhoneDetails != null && allPhoneDetails != "") { allPhoneDetails = allPhoneDetails + "\r\n"; }
+
                 if (email != null && email !="") { email = email + "\r\n"; }
                 if (email2 != null && email2 !="") { email2 = email2 + "\r\n"; }
                 if (email3 != null && email3 !="") { email3 = email3 + "\r\n"; }
                 if (homePage!= null && homePage != "") { homePage = "Homepage:\r\n" + homePage + "\r\n"; }
+                allEmailsDetails = email + email2 + email3 + homePage;
+                if (allEmailsDetails != null && allEmailsDetails != "") { allEmailsDetails = allEmailsDetails + "\r\n\r\n"; }
+
+                if (address2 != null && address2 != "") { address2 = address2 + "\r\n"; }
 
             }
 
@@ -133,15 +156,23 @@ namespace addressBookWebTests
 
                 Homepage = homePage,
 
+                Fio = fio,
+                SubInfo = subInfo,
+                AllPhoneDetails = allPhoneDetails,
+                AllEmailsDetails = allEmailsDetails
 
-                
-                
+
+
+
+
+
 
             };
 
         }
 
         private List<ContractData> contractCache = null;
+
 
         public List<ContractData> GetContractList()
         {

@@ -133,23 +133,8 @@ namespace addressBookWebTests
             }
         }
 
-        public string Fio
-        {
-            get
-            {
-                if (fio != null)
-                {
-                    return fio;
-                }
-                else
-                {
-                    return (FirstName + MiddleName + Lastname).Trim();
-                }
-            }
-            set { fio = value; }
+        public string Fio { get; set; }
 
-
-        }
 
         private string cleanUp(string text)
         {
@@ -180,30 +165,14 @@ namespace addressBookWebTests
                 }
                 else
                 {
-                    return (FirstName +" "+ MiddleName + " " + Lastname +"\r\n"
-                          + Nickname + "\r\n"
-                          + Title + "\r\n"
-                          + Company + "\r\n"
-                          + Address + "\r\n"
-                          + "\r\n"
-                          + PhoneHome 
-                          + PhoneMobile 
-                          + PhoneWork 
-                          + PhoneFax 
-                          + "\r\n"
-                          + Email
-                          + Email2 
-                          + Email3 
-                          + Homepage + "\r\n"
-                          + "\r\n"
-                          + "\r\n"
-                          + Address2+"\n").Trim();
+                    return (Fio + SubInfo + AllPhoneDetails + AllEmailsDetails + Address2).Trim();
                 }
             }
             set { allDetails = value; }
         }
-        
 
-
+        public string SubInfo { get; set; }
+        public string AllPhoneDetails { get; set; }
+        public string AllEmailsDetails { get; set; }
     }
 }

@@ -27,8 +27,8 @@ namespace addressBookWebTests
         [Test]
         public void TestContactInformationDetielsForm()
         {
-            ContractData fromEditForm = app.Contract.GetContactInformationFromEditForm(1,0);
-            ContractData fromDetailsForm = app.Contract.GetContactInformationFromDetails(1);
+            ContractData fromEditForm = app.Contract.GetContactInformationFromEditForm(0,0);
+            ContractData fromDetailsForm = app.Contract.GetContactInformationFromDetails(0);
 
             //Assert.AreEqual(fromEditForm, fromDetailsForm);
             Assert.AreEqual(fromEditForm.Alldetails, fromDetailsForm.Alldetails);

@@ -3,7 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addressbook_web_tests", "addressbook_web_tests\addressbook_web_tests.csproj", "{1E9FDAC9-64BD-4CC2-BFFA-1713D621A185}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addressbook_web_tests", "addressbook_web_tests\addressbook_web_tests.csproj", "{1E9FDAC9-64BD-4CC2-BFFA-1713D621A185}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "address_Book_Test_Data_Generators", "address_Book_Test_Data_Generators\address_Book_Test_Data_Generators.csproj", "{0169E33E-0CC1-4F7C-BCA9-C95F114C1218}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1E9FDAC9-64BD-4CC2-BFFA-1713D621A185} = {1E9FDAC9-64BD-4CC2-BFFA-1713D621A185}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{E5D142D5-6B0A-4EC5-BC26-73A8871C24D2}"
+	ProjectSection(SolutionItems) = preProject
+		addressbook_web_tests\groups.json = addressbook_web_tests\groups.json
+		addressbook_web_tests\groups.xml = addressbook_web_tests\groups.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +26,10 @@ Global
 		{1E9FDAC9-64BD-4CC2-BFFA-1713D621A185}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E9FDAC9-64BD-4CC2-BFFA-1713D621A185}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E9FDAC9-64BD-4CC2-BFFA-1713D621A185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0169E33E-0CC1-4F7C-BCA9-C95F114C1218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0169E33E-0CC1-4F7C-BCA9-C95F114C1218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0169E33E-0CC1-4F7C-BCA9-C95F114C1218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0169E33E-0CC1-4F7C-BCA9-C95F114C1218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

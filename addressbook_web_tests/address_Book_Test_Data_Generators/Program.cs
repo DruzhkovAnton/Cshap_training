@@ -159,7 +159,7 @@ namespace addressBookWebTestsGenerate
 
         static void writeContractsToXmlFile(List<ContractData> contracts, StreamWriter sw)
         {
-            new XmlSerializer(typeof(List<GroupData>)).Serialize(sw, contracts);
+            new XmlSerializer(typeof(List<ContractData>)).Serialize(sw, contracts);
         }
 
         static void writeGroupsToJsonFile(List<GroupData> groups, StreamWriter sw)

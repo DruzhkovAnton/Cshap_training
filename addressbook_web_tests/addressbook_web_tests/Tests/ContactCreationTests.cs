@@ -1,5 +1,9 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
+using Newtonsoft.Json;
 
 namespace addressBookWebTests
 {
@@ -31,7 +35,57 @@ namespace addressBookWebTests
             return contracts;
         }
 
-        [Test, TestCaseSource("RandomContractDataProvider")]
+        public static IEnumerable<ContractData> ContractDataFromCsvFile()
+        {
+            List<ContractData> contracts = new List<ContractData>();
+
+            string[] lines = File.ReadAllLines(@"contract.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                contracts.Add(new ContractData(parts[0], parts[1])
+                {
+                    MiddleName = parts[2],
+                    Nickname = parts[3],
+                    Title = parts[4],
+                    Company = parts[5],
+                    Address = parts[6],
+                    Address2 = parts[7],
+                    PhoneHome = parts[8],
+                    PhoneMobile = parts[9],
+                    PhoneWork = parts[10],
+                    PhoneFax = parts[11],
+                    Phone2 = parts[12],
+                    Email = parts[13],
+                    Email2 = parts[14],
+                    Email3 = parts[15],
+                    Homepage = parts[16]
+                });
+
+            }
+
+
+            return contracts;
+
+
+        }
+
+        public static IEnumerable<ContractData> ContractDataFromXmlFile()
+        {
+
+            return (List<ContractData>)
+                new XmlSerializer(typeof(List<ContractData>))
+                .Deserialize(new StreamReader(@"contract.xml"));
+
+        }
+
+        public static IEnumerable<ContractData> ContractsDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContractData>>(
+                File.ReadAllText(@"contract.JSON"));
+        }
+
+        [Test, TestCaseSource("ContractsDataFromJsonFile")]
         public void ContractCreationTest(ContractData contract)
         {
             List<ContractData> oldContracts = app.Contract.GetContractList();

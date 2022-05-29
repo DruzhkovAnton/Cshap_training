@@ -36,6 +36,10 @@ namespace addressBookWebTests
             Lastname = lastname;
         }
 
+        public ContractData()
+        {
+        }
+
         public bool Equals(ContractData other)
         {
             if (object.ReferenceEquals(other, null)) { return false; }

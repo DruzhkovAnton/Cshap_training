@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinqToDB.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace addressBookWebTests
 {
+    [Table (Name = "group_list")]
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
 
@@ -36,14 +38,16 @@ namespace addressBookWebTests
             if (Object.ReferenceEquals(other, null)) { return 1; }
             return Name.CompareTo(other.Name);
         }
-
+        [Column(Name = "group_name")]
         public string Name { get; set; }
 
-
+        [Column(Name = "group_header")]
         public string Header { get; set; }
 
+        [Column(Name = "group_footer")]
         public string Footer { get; set; }
 
+        [Column(Name = "group_id"), PrimaryKey, Identity]
         public string Id { get; set; }
 
         public GroupData()

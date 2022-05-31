@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Linq;
+using LinqToDB;
+
 
 namespace addressBookWebTests
 {
@@ -50,7 +53,7 @@ namespace addressBookWebTests
         public static IEnumerable<GroupData> GroupDataFromXmlFile()
         {
 
-            return (List<GroupData>) 
+            return (List<GroupData>)
                 new XmlSerializer(typeof(List<GroupData>))
                 .Deserialize(new StreamReader(@"groups.xml"));
 
@@ -66,7 +69,7 @@ namespace addressBookWebTests
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-            
+
             app.Groups.Create(group);
 
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
@@ -79,6 +82,24 @@ namespace addressBookWebTests
 
             app.Auth.LogOut();
         }
-        
+
+        [Test]
+        public void TestDBConnectivity()
+        {
+
+
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUi = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                List<GroupData> fromDB = (from g in db.Groups select g).ToList();
+            }
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+        }
     }
 }

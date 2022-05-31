@@ -12,11 +12,7 @@ namespace addressBookWebTests
     {
 
 
-        public AddressBookDB() : base("addressbook") 
-        {
-            string ConnectionString = "Server=localhost;Port=3306;Database=addressbook;Uid=root;Pwd=;charset=utf8;Allow Zero Datetime=true";
-            LinqToDB.Data.DataConnection con = new LinqToDB.Data.DataConnection();
-        }
+        public AddressBookDB() : base("addressbook"){ }
         
 
         public ITable<GroupData> Groups => this.GetTable<GroupData>();

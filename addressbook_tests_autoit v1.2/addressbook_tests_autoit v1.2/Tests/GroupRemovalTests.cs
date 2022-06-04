@@ -20,6 +20,8 @@ namespace addressbook_tests_autoit
             Assert.AreEqual(oldGroups.Count - 1, newGroups.Count);
 
             oldGroups.RemoveAt(1);
+            oldGroups.Sort();
+            newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
     }

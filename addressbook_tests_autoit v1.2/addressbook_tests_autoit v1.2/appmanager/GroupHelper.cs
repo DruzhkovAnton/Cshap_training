@@ -33,6 +33,7 @@ namespace addressbook_tests_autoit
         private void OkButtonClick()
         {
             aux.ControlClick(DeleteGroupWinTitle, "", "WindowsForms10.BUTTON.app.0.2c908d53");
+            aux.WinWait(GroupWinTitle);
         }
 
         private void SelectAllDeleteInGroupsButton()

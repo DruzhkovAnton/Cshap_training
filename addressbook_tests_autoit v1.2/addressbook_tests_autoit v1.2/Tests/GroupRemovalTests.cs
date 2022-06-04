@@ -13,6 +13,26 @@ namespace addressbook_tests_autoit
         [Test]
         public void TestGroupRemoval()
         {
+            if(app.Groups.GetGroupList().Count < 1)
+            {
+                GroupData newGroup = new GroupData()
+                {
+                    Name = "test"
+                };
+
+                app.Groups.Add(newGroup);
+            }
+            
+            if (!app.Groups.IsGroupCreate(1))
+            {
+                GroupData newGroup = new GroupData()
+                {
+                    Name = "test"
+                };
+
+                app.Groups.Add(newGroup);
+            }
+
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Removal(1);
 

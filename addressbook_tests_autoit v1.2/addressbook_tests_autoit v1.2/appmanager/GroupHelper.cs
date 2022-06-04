@@ -9,6 +9,19 @@ namespace addressbook_tests_autoit
         public static string DeleteGroupWinTitle = "Delete group";
         public GroupHelper(ApplicationManager manager) : base(manager) { }
 
+        internal bool IsGroupCreate(int v)
+        {
+            OpenGroupsDialog();
+            string existItem =
+            aux.ControlTreeView(GroupWinTitle, "", "WindowsForms10.SysTreeView32.app.0.2c908d51",
+                "Exists", "#0|#"+v, "");
+            if (existItem == "1")
+            {
+                return true;
+            }
+            else return false;
+        }
+
         internal void Add(GroupData newGroup)
         {
             aux.ControlClick(WinTitle, "", "WindowsForms10.BUTTON.app.0.2c908d512");

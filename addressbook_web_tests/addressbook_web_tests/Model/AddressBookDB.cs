@@ -12,7 +12,7 @@ namespace addressBookWebTests
     {
 
 
-        public AddressBookDB() : base("addressbook"){ }
+        public AddressBookDB() : base("AddressBookDB") { }
         
 
         public ITable<GroupData> Groups => this.GetTable<GroupData>();

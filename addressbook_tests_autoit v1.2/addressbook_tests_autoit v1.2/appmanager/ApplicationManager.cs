@@ -28,6 +28,9 @@ namespace addressbook_tests_autoit
 
         public void Stop()
         {
+            aux.WinWait(WinTtitle);
+            aux.WinActivate(WinTtitle);
+            aux.WinWaitActive(WinTtitle);
             aux.ControlClick(WinTtitle, "", "WindowsForms10.BUTTON.app.0.2c908d510");
         }
 

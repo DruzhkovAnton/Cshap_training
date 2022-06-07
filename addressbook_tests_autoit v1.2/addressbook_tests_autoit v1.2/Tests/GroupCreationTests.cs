@@ -28,6 +28,8 @@ namespace addressbook_tests_autoit
 
 
             Assert.AreEqual(oldGroups, newGroups);
+
+            app.Stop();
         }
     }
 }

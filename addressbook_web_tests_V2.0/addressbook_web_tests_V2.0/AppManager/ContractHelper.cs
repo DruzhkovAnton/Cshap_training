@@ -38,6 +38,21 @@ namespace addressBookWebTests
             };
         }
 
+        public void RemoveContractToGroup(ContractData contract, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectGroupToRemove(group.Name);
+            SelectContract(contract.Id);
+            CommitRemoveFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                    .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        private void CommitRemoveFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
         public void AddContractToGroup(ContractData contract, GroupData group)
         {
             manager.Navigator.GoToHomePage();
@@ -50,6 +65,11 @@ namespace addressBookWebTests
                 .Until(d=>d.FindElements(By.CssSelector("div.msgbox")).Count>0);
 
 
+        }
+
+        private void SelectGroupToRemove(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
         }
 
         private void CommitAddingContractToGroup()

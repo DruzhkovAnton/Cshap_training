@@ -25,13 +25,13 @@ namespace addressBookWebTests
                 app.Groups.Create(group);
             }
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[0];
 
-            app.Groups.Modify(0, newData);
-            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
+            app.Groups.Modify(oldData, newData);
+            Assert.AreEqual(oldGroups.Count, GroupData.GetAll().Count);
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups[0].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();
@@ -46,7 +46,7 @@ namespace addressBookWebTests
             }
 
 
-            app.Auth.LogOut();
+            //app.Auth.LogOut();
         }
     }
 }

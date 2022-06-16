@@ -247,10 +247,10 @@ namespace addressBookWebTests
             return driver.FindElements(By.XPath("//tr[@name='entry']")).Count;
         }
 
-        internal ContractHelper Remove(int v)
+        internal ContractHelper Remove(ContractData contract)
         {
             manager.Navigator.GoToContractPage();
-            SelectContract(v);
+            SelectContract(contract.Id);
             RemoveContract();
             AlertClick();
             manager.Navigator.GoToContractPage();
@@ -266,11 +266,11 @@ namespace addressBookWebTests
 
         }
 
-        internal ContractHelper Modify(int v, ContractData newData)
+        internal ContractHelper Modify(ContractData contract, ContractData newData)
         {
             manager.Navigator.GoToContractPage();
-            SelectContract(v);
-            InitContractModification(v);
+            SelectContract(contract.Id);
+            InitContractModificationOnID(contract.Id);
             FillContractForm(newData);
             SubmitContractModification();
             ReturnContractPage();
@@ -346,6 +346,12 @@ namespace addressBookWebTests
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[7]
                 .FindElement(By.TagName("a")).Click();
+            return this;
+        }
+
+        public ContractHelper InitContractModificationOnID(string contactId)
+        {
+            driver.FindElement(By.CssSelector("[href*='edit.php?id=" + contactId + "']")).Click();
             return this;
         }
 

@@ -23,14 +23,14 @@ namespace addressBookWebTests
                 app.Contract.Сreate(contract);
             }
 
-            List<ContractData> oldContracts = app.Contract.GetContractList();
-
-            app.Contract.Remove(0);
+            List<ContractData> oldContracts = ContractData.GetAll();
+            ContractData toBeRemoved = oldContracts[0];
+            app.Contract.Remove(toBeRemoved);
             Assert.AreEqual(oldContracts.Count-1, app.Contract.GetContractCount());
 
-            List<ContractData> newContracts = app.Contract.GetContractList();
+            List<ContractData> newContracts = ContractData.GetAll();
 
-            ContractData toBeRemoved = oldContracts[0];
+
             oldContracts.RemoveAt(0);
             Assert.AreEqual(oldContracts, newContracts);
 
@@ -39,7 +39,7 @@ namespace addressBookWebTests
                 Assert.AreNotEqual(contract.Id, toBeRemoved.Id);
             }
 
-            app.Auth.LogOut();
+            //app.Auth.LogOut();
         }
     }
 }

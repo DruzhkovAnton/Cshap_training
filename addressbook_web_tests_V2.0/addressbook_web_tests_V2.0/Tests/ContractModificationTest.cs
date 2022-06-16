@@ -22,23 +22,15 @@ namespace addressBookWebTests
 
             if (app.Contract.IsContractCreate(2))
             {
-                ContractData contract = new ContractData("NewContract", "xxx");
-                contract.MiddleName = "ccc1";
-                contract.Nickname = "vvv";
-                contract.Title = "111";
-                contract.Company = "222";
-                contract.Address = "333";
-                contract.PhoneHome = "44444";
-                contract.Email = "5555";
-                contract.Homepage = "www.jjjj.ru";
-                app.Contract.Сreate(contract);
+
+                app.Contract.Сreate(newData);
             }
 
             List<ContractData> oldContracts = ContractData.GetAll();
 
-            app.Contract.Modify(0, newData);
+            app.Contract.Modify(oldContracts[0], newData);
 
-            Assert.AreEqual(oldContracts.Count, app.Contract.GetContractCount());
+            Assert.AreEqual(oldContracts.Count, ContractData.GetAll().Count);
 
             List<ContractData> newContracts = ContractData.GetAll();
             oldContracts[0].FirstName = newData.FirstName;

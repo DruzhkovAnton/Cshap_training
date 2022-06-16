@@ -146,5 +146,18 @@ namespace addressBookWebTests
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }
+
+        public GroupHelper GroupExist() 
+        {
+            manager.Navigator.GoToGroupsPage();
+            if (!IsGroupCreate(0))
+            {
+                GroupData group = new GroupData("zzz");
+                group.Header = "ttt";
+                group.Footer = "kkk";
+                Create(group);
+            }
+            return this;
+        }
     }
 }

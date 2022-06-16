@@ -393,5 +393,36 @@ namespace addressBookWebTests
         {
             driver.FindElement(By.Id(id)).Click();
         }
+
+        public ContractHelper ContractExist() 
+        {
+            manager.Navigator.GoToHomePage();
+            if (!IsElementPresent(By.Name("entry")))
+            {
+                ContractData contact = new ContractData("First", "Last");
+                Сreate(contact);
+            }
+            return this;
+        }
+
+        public void InContactsExistGroup(GroupData group) //проверка есть ли контакт в группе - удалить группу
+        {
+            if (ContractData.GetAll().Except(group.GetContacts()).Count() == 0)
+            {
+                ContractData contact = group.GetContacts().First();
+
+                RemoveContractToGroup(contact, group);
+            }
+        }
+
+        public void NoContractsExistInGroup(GroupData group) //проверка если нет контакта в группе - добавить группу
+        {
+            if (group.GetContacts().Count() == 0)
+            {
+                ContractData contact = ContractData.GetAll().First();
+
+                AddContractToGroup(contact, group);
+            }
+        }
     }
 }

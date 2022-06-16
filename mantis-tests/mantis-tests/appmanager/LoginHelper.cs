@@ -13,9 +13,9 @@ namespace mantis_tests
 
         public void LogIn(AccountData account)
         {
-            Type(By.Name("username"), "administrator");
+            Type(By.Name("username"), account.Username);
             driver.FindElement(By.XPath("//*[@id='login-form']/fieldset/input[2]")).Click();
-            Type(By.Name("password"), "administrator");
+            Type(By.Name("password"), account.Password);
             driver.FindElement(By.XPath("//*[@id='login-form']/fieldset/input[3]")).Click();
 
         }

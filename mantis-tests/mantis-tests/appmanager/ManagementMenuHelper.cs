@@ -25,12 +25,12 @@ namespace mantis_tests
 
         public void GoToControlProjectTab()
         {
-            driver.Navigate().GoToUrl("http://localhost/mantisbt-2.2.0/manage_proj_page.php");
+            driver.Navigate().GoToUrl(baseURL+"manage_proj_page.php");
         }
 
         internal void GoToNewProject()
         {
-            driver.Navigate().GoToUrl("http://localhost/mantisbt-2.2.0/manage_proj_create_page.php");
+            driver.Navigate().GoToUrl(baseURL+"manage_proj_create_page.php");
         }
 
         internal void GoToHomePage()

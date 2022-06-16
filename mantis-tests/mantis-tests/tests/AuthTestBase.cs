@@ -7,7 +7,7 @@ namespace mantis_tests
         [SetUp]
         public void SetupLogin()
         {
-            app.Auth.LogIn(new AccountData("administrator", "root"));
+            app.Auth.LogIn(new AccountData("administrator", "1234"));
 
         }
     }

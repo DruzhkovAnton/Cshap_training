@@ -21,5 +21,7 @@
             set { password = value; }
         }
 
+        public static AccountData account = new AccountData("administrator", "1234");
+
     }
 }

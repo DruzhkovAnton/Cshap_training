@@ -20,6 +20,29 @@ namespace mantis_tests
 
         private List<ProjectData> projectCache = null;
 
+        public List<ProjectData> GetAllProjectSoap(AccountData account)
+        {
+            
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            List<ProjectData> allProject = new List<ProjectData>();
+            Mantis.ProjectData[] projectDatas = client.mc_projects_get_user_accessible
+                                                 (account.Username, account.Password);
+            foreach (Mantis.ProjectData projectData in projectDatas)
+            {
+                allProject.Add(new ProjectData(projectData.name, projectData.description));
+            }
+            return allProject;
+        }
+
+        internal void CreateSoap(AccountData account, ProjectData project)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData projectData = new Mantis.ProjectData();
+            projectData.name = project.Name;
+            projectData.description = project.Description;
+            client.mc_project_add(account.Username, account.Password, projectData);
+        }
+
         public List<ProjectData> GetProjectList()
         {
             string cels = "//*[@id='main-container']/div[2]/div[2]/div/div/div[2]/div[2]/div/div[2]/table/tbody/tr";

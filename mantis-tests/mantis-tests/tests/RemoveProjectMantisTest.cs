@@ -14,17 +14,18 @@ namespace mantis_tests
         {
             ProjectData project = new ProjectData("ProjectTest", "DescriptionTest");
 
-            List<ProjectData> oldProjects = app.Project.GetProjectList();
+            List<ProjectData> oldProjects = app.Project.GetAllProjectSoap(AccountData.account);
             if(oldProjects.Count == 0)
             {
-                app.Project.Create(project);
+                //app.Project.Create(project);
+                app.Project.CreateSoap(AccountData.account, project);
             }
 
             app.Project.Remove(oldProjects[0].Name);
 
 
 
-            List<ProjectData> newProjects = app.Project.GetProjectList();
+            List<ProjectData> newProjects = app.Project.GetAllProjectSoap(AccountData.account);
 
             Assert.AreEqual(oldProjects.Count - 1, newProjects.Count);
 

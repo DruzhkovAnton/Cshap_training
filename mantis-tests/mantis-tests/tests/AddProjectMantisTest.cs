@@ -15,9 +15,11 @@ namespace mantis_tests
         public void TestAddProjectMantis()
         {
 
+
             ProjectData project = new ProjectData("ProjectTest", "DescriptionTest");
 
-            List<ProjectData> oldProjects = app.Project.GetProjectList();
+            //List<ProjectData> oldProjects = app.Project.GetProjectList();
+            List<ProjectData> oldProjects = app.Project.GetAllProjectSoap(AccountData.account);
 
             if (app.Project.IsProjectPresent(project.Name))
             {
@@ -25,7 +27,7 @@ namespace mantis_tests
             }
             app.Project.Create(project);
 
-            List<ProjectData> newProjects = app.Project.GetProjectList();
+            List<ProjectData> newProjects = app.Project.GetAllProjectSoap(AccountData.account);
 
             Assert.AreEqual(oldProjects.Count + 1, newProjects.Count);
 

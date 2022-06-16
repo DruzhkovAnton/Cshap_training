@@ -30,6 +30,7 @@ namespace mantis_tests
             navigator = new ManagementMenuHelper(this, baseURL);
             projectHelper = new ProjectManagementHelper(this);
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            API = new APIHelper(this);
         }
 
         ~ApplicationManager()
@@ -77,5 +78,6 @@ namespace mantis_tests
             get { return projectHelper; }
         }
 
+        public APIHelper API { get;  set; }
     }
 }
